@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-test
+  namespace: rca-agent-test
+  labels:
+    app: nginx-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-test
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              set -e
+              if [ -z "$APP_CONFIG_ENV" ]; then
+                echo "FATAL: APP_CONFIG_ENV is required but not set" >&2
+                exit 1
+              fi
+              exec nginx -g 'daemon off;'
+          env:
+            - name: NGINX_ENTRYPOINT_QUIET_LOGS
+              value: "1"
+            - name: APP_CONFIG_ENV
+              value: "production"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-test
+  namespace: rca-agent-test
+  labels:
+    app: nginx-test
+spec:
+  selector:
+    app: nginx-test
+  ports:
+    - port: 80
+      targetPort: 80

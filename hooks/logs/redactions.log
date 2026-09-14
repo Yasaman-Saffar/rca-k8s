@@ -1,0 +1,10 @@
+2026-09-14T11:47:03.440272Z tool=Write matched=AWS access key
+2026-09-14T11:47:54.333973+00:00 tool=Bash matched=AWS access key
+2026-09-14T11:47:54.361291+00:00 tool=Bash matched=private key block
+2026-09-14T11:48:23.972165+00:00 tool=Bash matched=key=value secret-like assignment
+2026-09-14T11:48:24.000527+00:00 tool=Bash matched=AWS access key
+2026-09-14T11:48:24.026777+00:00 tool=Bash matched=private key block
+2026-09-14T11:49:15.982843+00:00 tool=Edit matched=key=value secret-like assignment
+2026-09-14T11:51:42.431530+00:00 tool=Bash matched=key=value secret-like assignment
+2026-09-14T11:51:42.458795+00:00 tool=Bash matched=AWS access key
+2026-09-14T11:51:42.487769+00:00 tool=Bash matched=private key block
